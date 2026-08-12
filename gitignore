@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# LeRobot outputs (large files, don't commit)
+outputs/
+*.mp4
+*.avi
+
+# Datasets (these live on Hugging Face Hub, not in git)
+data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env

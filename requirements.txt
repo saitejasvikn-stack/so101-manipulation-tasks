@@ -1,0 +1,3 @@
+# Core LeRobot (install lerobot itself separately via its own repo, see README)
+opencv-python>=4.9.0
+numpy>=1.24.0

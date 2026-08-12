@@ -1,0 +1,46 @@
+# SO-101 Manipulation Tasks
+
+Three imitation-learning manipulation tasks trained on a Hugging Face LeRobot SO-101 arm, built as part of a Physical AI / Robotics session.
+
+## Tasks
+
+| Task | Policy | Status | Notes |
+|---|---|---|---|
+| 1. Pick and Place | ACT | ✅ Working | Baseline imitation learning task |
+| 2. Pour 50ml of blue liquid | ACT + CV stopping condition | ⚙️ In progress | Uses a red reference line + OpenCV color detection instead of a scale |
+| 3. Plug in charger | ACT / Diffusion Policy | ❌ Known limitation | High-precision insertion task — see `task3_charger_plug/notes.md` for failure analysis |
+
+## Hardware
+
+- SO-101 leader + follower arm pair
+- 2x USB webcams (overhead + wrist), 720p, different models to avoid USB path collisions
+- Windows 11, Python 3.11, RTX 4050 Laptop GPU
+
+## Software stack
+
+- [LeRobot](https://github.com/huggingface/lerobot) — Hugging Face's robotics framework (calibration, teleoperation, recording, training)
+- OpenCV — custom vision logic for Task 2's stopping condition
+- ACT (Action Chunking Transformer) policy for Tasks 1 & 2
+
+## Setup
+
+```powershell
+git clone https://github.com/huggingface/lerobot.git
+cd lerobot
+python -m venv .venv
+.venv\Scripts\activate
+pip install -e ".[feetech]"
+pip install -e ".[core_scripts,training]"
+```
+
+See each task folder for task-specific recording/training commands.
+
+## Repo structure
+
+```
+task1_pick_place/    - baseline pick-and-place, standard LeRobot workflow
+task2_pouring/        - pouring task with custom CV-based volume detection
+task3_charger_plug/   - high-precision insertion task (documented limitations)
+calibration/          - saved calibration files (red line position, etc.)
+notes/                - general project notes (camera setup, lessons learned)
+```
